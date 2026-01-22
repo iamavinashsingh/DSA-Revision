@@ -55,4 +55,8 @@ public:
 
 ## DRY RUN 
 
-
+```txt
+nums = [2, 2, -1, 3, -2, 2, 1, 1, 1, 0, -1]
+operations = 0
+n = 11 (array size)
+```
