@@ -59,7 +59,10 @@ public:
 nums = [2, 2, -1, 3, -2, 2, 1, 1, 1, 0, -1]
 operations = 0
 n = 11 (array size)
+```
+---
 
+```
 First While Loop Iteration (operations = 0):
 Check if array is sorted (non-decreasing):
 
@@ -124,7 +127,9 @@ Erase nums[index+1] = nums[10]
 New array: [2, 2, -1, 3, -2, 2, 1, 1, 1, -1]
 
 operations = 1
-
+```
+---
+```
 Second While Loop Iteration (operations = 1):
 Check if array is sorted:
 
@@ -166,7 +171,10 @@ Erase nums[5]
 New array: [2, 2, -1, 3, 0, 1, 1, 1, -1]
 
 operations = 2
+```
+---
 
+```
 Third While Loop Iteration (operations = 2):
 Check if array is sorted:
 
@@ -203,7 +211,10 @@ Erase nums[8]
 New array: [2, 2, -1, 3, 0, 1, 1, 0]
 
 operations = 3
+```
+---
 
+```
 Fourth While Loop Iteration (operations = 3):
 Check if array is sorted in [2, 2, -1, 3, 0, 1, 1, 0]:
 
@@ -238,7 +249,10 @@ Erase nums[2]
 New array: [2, 1, 3, 0, 1, 1, 0]
 
 operations = 4
+```
+---
 
+```
 Fifth While Loop Iteration (operations = 4):
 Check if array is sorted in [2, 1, 3, 0, 1, 1, 0]:
 
@@ -269,7 +283,11 @@ Erase nums[4]
 New array: [2, 1, 3, 1, 1, 0]
 
 operations = 5
+```
 
+---
+
+```
 Sixth While Loop Iteration (operations = 5):
 Check if array is sorted in [2, 1, 3, 1, 1, 0]:
 
@@ -298,7 +316,10 @@ Erase nums[5]
 New array: [2, 1, 3, 1, 1]
 
 operations = 6
+```
+---
 
+```
 Seventh While Loop Iteration (operations = 6):
 Check if array is sorted in [2, 1, 3, 1, 1]:
 
@@ -325,7 +346,11 @@ Erase nums[4]
 New array: [2, 1, 3, 2]
 
 operations = 7
+```
 
+---
+
+```
 Eighth While Loop Iteration (operations = 7):
 Check if array is sorted in [2, 1, 3, 2]:
 
@@ -350,7 +375,11 @@ Erase nums[1]
 New array: [3, 3, 2]
 
 operations = 8
+```
 
+---
+
+```
 Ninth While Loop Iteration (operations = 8):
 Check if array is sorted in [3, 3, 2]:
 
@@ -375,7 +404,10 @@ Erase nums[2]
 New array: [3, 5]
 
 operations = 9
+```
+---
 
+```
 Tenth While Loop Iteration (operations = 9):
 Check if array is sorted in [3, 5]:
 
@@ -385,3 +417,15 @@ Array is sorted! sorted = true
 Break out of while loop.
 
 ```
+---
+
+### Final Result:
+
+```
+Return value: 9
+Final array: [3, 5]
+
+```
+
+
+--
