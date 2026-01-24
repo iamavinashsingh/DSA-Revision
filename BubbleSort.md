@@ -67,356 +67,93 @@ void bubbleSort(vector<int>& arr) {
 
 ---
 
-### PHASE 1 — COMPLETE STATE INVENTORY
-
-**1. Variables & Registers**
-
-| Variable | Type | Scope | Initial Value | Description |
-| :--- | :--- | :--- | :--- | :--- |
-| `arr` | `vector<int>&` | Parameter | `[5, 3, 7, 2, 4]` | Reference to input data. |
-| `n` | `int` | Local | Undefined (initially) | Size of the vector. |
-| `i` | `int` | Local | Undefined | Outer loop counter (pass number). |
-| `j` | `int` | Local | Undefined | Inner loop counter (comparator). |
-| `temp` | `int` | Block | Undefined | Temporary storage for swapping. |
-
-**2. Data Structures (Vector Layout)**
-
-| Index | 0 | 1 | 2 | 3 | 4 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Value** | **5** | **3** | **7** | **2** | **4** |
+# Bubble Sort — Detailed Pass-wise Tables
 
 ---
 
-### PHASE 2 — EXECUTION TRACE
-
-#### Initialization
-
-[Step 0]
-├── Line: `void bubbleSort(vector<int>& arr) {`
-├── Operation: Function Entry
-└── Next: Line 2
-
-[Step 1]
-├── Line: `int n = arr.size();`
-├── Operation: size determination
-├── Evaluation: `arr` has 5 elements.
-├── After State:
-│   └── Variables: `n` = **5**
-└── Next: Line 3
+This document breaks **Bubble Sort execution** into **clear table-based traces**, grouped by each outer-loop pass (`i`).
 
 ---
 
-### OUTER LOOP — Pass 1 (i = 0)
-Target: Bubble the largest element to `arr[4]`.
+## Pass 1 — `i = 0`
 
-[Step 2]
-├── Line: `for (int i = 0; i < n - 1; i++)`
-├── Operation: Loop Initialization & Check
-├── Evaluation: `i` init to 0. Check `0 < (5 - 1)` $\rightarrow$ `0 < 4` $\rightarrow$ **TRUE**
-├── After State:
-│   └── Variables: `i` = **0**
-└── Next: Line 4
+Initial Array: `[5, 3, 7, 2, 4]`
 
-#### INNER LOOP — Iteration 1 (j = 0)
+| State / Step        | j = 0     | j = 1     | j = 2     | j = 3     |
+| ------------------- | --------- | --------- | --------- | --------- |
+| **Array before**    | 5,3,7,2,4 | 3,5,7,2,4 | 3,5,7,2,4 | 3,5,2,7,4 |
+| `i`                 | 0         | 0         | 0         | 0         |
+| `j`                 | 0         | 1         | 2         | 3         |
+| `arr[j]`            | 5         | 5         | 7         | 7         |
+| `arr[j+1]`          | 3         | 7         | 2         | 4         |
+| `arr[j] > arr[j+1]` | TRUE      | FALSE     | TRUE      | TRUE      |
+| Swap performed      | Yes       | No        | Yes       | Yes       |
+| **Array after**     | 3,5,7,2,4 | 3,5,7,2,4 | 3,5,2,7,4 | 3,5,2,4,7 |
 
-[Step 3]
-├── Line: `for (int j = 0; j < n - i - 1; j++)`
-├── Operation: Inner Loop Init & Check
-├── Evaluation: `j` init to 0. Check `0 < (5 - 0 - 1)` $\rightarrow$ `0 < 4` $\rightarrow$ **TRUE**
-├── After State:
-│   └── Variables: `j` = **0**
-└── Next: Line 5
-
-[Step 4]
-├── Line: `if (arr[j] > arr[j + 1])`
-├── Before State: `arr`=[5, 3, 7, 2, 4], j=0
-├── Operation: Comparison
-├── Evaluation: `arr[0]` (5) > `arr[1]` (3) $\rightarrow$ **TRUE**
-└── Next: Line 6 (Swap Block)
-
-[Step 5]
-├── Line: `int temp = arr[j];`
-├── Operation: Store temp
-├── After State:
-│   └── Variables: `temp` = **5**
-└── Next: Line 7
-
-[Step 6]
-├── Line: `arr[j] = arr[j + 1];`
-├── Operation: Overwrite left
-├── After State:
-│   └── Data Structures: `arr[0]`: 5 $\rightarrow$ **3**
-└── Next: Line 8
-
-[Step 7]
-├── Line: `arr[j + 1] = temp;`
-├── Operation: Overwrite right (Complete Swap)
-├── After State:
-│   └── Data Structures: `arr[1]`: 3 $\rightarrow$ **5**
-│   └── Current Array: **[3, 5, 7, 2, 4]**
-└── Next: Line 4 (Inner Loop Increment)
-
-#### INNER LOOP — Iteration 2 (j = 1)
-
-[Step 8]
-├── Line: `for (...; j++)`
-├── Operation: Increment & Check
-├── Evaluation: `j` becomes 1. Check `1 < 4` $\rightarrow$ **TRUE**
-├── After State:
-│   └── Variables: `j` = **1**
-└── Next: Line 5
-
-[Step 9]
-├── Line: `if (arr[j] > arr[j + 1])`
-├── Before State: `arr`=[3, 5, 7, 2, 4], j=1
-├── Operation: Comparison
-├── Evaluation: `arr[1]` (5) > `arr[2]` (7) $\rightarrow$ **FALSE**
-└── Next: Line 4 (Inner Loop Increment)
-
-#### INNER LOOP — Iteration 3 (j = 2)
-
-[Step 10]
-├── Line: `for (...; j++)`
-├── Operation: Increment & Check
-├── Evaluation: `j` becomes 2. Check `2 < 4` $\rightarrow$ **TRUE**
-├── After State:
-│   └── Variables: `j` = **2**
-└── Next: Line 5
-
-[Step 11]
-├── Line: `if (arr[j] > arr[j + 1])`
-├── Before State: `arr`=[3, 5, 7, 2, 4], j=2
-├── Operation: Comparison
-├── Evaluation: `arr[2]` (7) > `arr[3]` (2) $\rightarrow$ **TRUE**
-└── Next: Line 6 (Swap Block)
-
-[Step 12]
-├── Line: `int temp = arr[j];`
-├── After State: `temp` = **7**
-└── Next: Line 7
-
-[Step 13]
-├── Line: `arr[j] = arr[j + 1];`
-├── After State: `arr[2]`: 7 $\rightarrow$ **2**
-└── Next: Line 8
-
-[Step 14]
-├── Line: `arr[j + 1] = temp;`
-├── After State: `arr[3]`: 2 $\rightarrow$ **7**
-│   └── Current Array: **[3, 5, 2, 7, 4]**
-└── Next: Line 4
-
-#### INNER LOOP — Iteration 4 (j = 3)
-
-[Step 15]
-├── Line: `for (...; j++)`
-├── Operation: Increment & Check
-├── Evaluation: `j` becomes 3. Check `3 < 4` $\rightarrow$ **TRUE**
-├── After State:
-│   └── Variables: `j` = **3**
-└── Next: Line 5
-
-[Step 16]
-├── Line: `if (arr[j] > arr[j + 1])`
-├── Before State: `arr`=[3, 5, 2, 7, 4], j=3
-├── Operation: Comparison
-├── Evaluation: `arr[3]` (7) > `arr[4]` (4) $\rightarrow$ **TRUE**
-└── Next: Line 6 (Swap Block)
-
-[Step 17]
-├── Line: `int temp = arr[j];`
-├── After State: `temp` = **7**
-└── Next: Line 7
-
-[Step 18]
-├── Line: `arr[j] = arr[j + 1];`
-├── After State: `arr[3]`: 7 $\rightarrow$ **4**
-└── Next: Line 8
-
-[Step 19]
-├── Line: `arr[j + 1] = temp;`
-├── After State: `arr[4]`: 4 $\rightarrow$ **7**
-│   └── Current Array: **[3, 5, 2, 4, 7]**
-└── Next: Line 4
-
-#### INNER LOOP — Termination
-
-[Step 20]
-├── Line: `for (...; j++)`
-├── Operation: Check
-├── Evaluation: `j` becomes 4. Check `4 < 4` $\rightarrow$ **FALSE**
-└── Next: Line 3 (Outer Loop Increment)
+Result after Pass 1: `[3, 5, 2, 4, 7]`
 
 ---
 
-### OUTER LOOP — Pass 2 (i = 1)
-Target: Bubble 2nd largest element to `arr[3]`.
-Current Array: `[3, 5, 2, 4, 7]`
+## Pass 2 — `i = 1`
 
-[Step 21]
-├── Line: `for (...; i++)`
-├── Operation: Increment & Check
-├── Evaluation: `i` becomes 1. Check `1 < 4` $\rightarrow$ **TRUE**
-├── After State: `i` = **1**
-└── Next: Line 4
+Initial Array: `[3, 5, 2, 4, 7]`
 
-#### INNER LOOP — Iteration 1 (j = 0)
+| State / Step        | j = 0     | j = 1     | j = 2     |
+| ------------------- | --------- | --------- | --------- |
+| **Array before**    | 3,5,2,4,7 | 3,5,2,4,7 | 3,2,5,4,7 |
+| `i`                 | 1         | 1         | 1         |
+| `j`                 | 0         | 1         | 2         |
+| `arr[j]`            | 3         | 5         | 5         |
+| `arr[j+1]`          | 5         | 2         | 4         |
+| `arr[j] > arr[j+1]` | FALSE     | TRUE      | TRUE      |
+| Swap performed      | No        | Yes       | Yes       |
+| **Array after**     | 3,5,2,4,7 | 3,2,5,4,7 | 3,2,4,5,7 |
 
-[Step 22]
-├── Line: `for (int j = 0; j < n - i - 1; j++)`
-├── Operation: Reset & Check
-├── Evaluation: `j` init to 0. Check `0 < (5 - 1 - 1)` $\rightarrow$ `0 < 3` $\rightarrow$ **TRUE**
-├── After State: `j` = **0**
-└── Next: Line 5
-
-[Step 23]
-├── Line: `if (arr[j] > arr[j + 1])`
-├── Evaluation: `arr[0]` (3) > `arr[1]` (5) $\rightarrow$ **FALSE**
-└── Next: Line 4
-
-#### INNER LOOP — Iteration 2 (j = 1)
-
-[Step 24]
-├── Line: `for (...; j++)`
-├── Evaluation: `j` becomes 1. Check `1 < 3` $\rightarrow$ **TRUE**
-├── After State: `j` = **1**
-└── Next: Line 5
-
-[Step 25]
-├── Line: `if (arr[j] > arr[j + 1])`
-├── Evaluation: `arr[1]` (5) > `arr[2]` (2) $\rightarrow$ **TRUE**
-└── Next: Line 6
-
-[Step 26-28]
-├── Operation: Swap (5, 2)
-├── After State:
-│   ├── temp = 5
-│   └── Current Array: **[3, 2, 5, 4, 7]**
-└── Next: Line 4
-
-#### INNER LOOP — Iteration 3 (j = 2)
-
-[Step 29]
-├── Line: `for (...; j++)`
-├── Evaluation: `j` becomes 2. Check `2 < 3` $\rightarrow$ **TRUE**
-├── After State: `j` = **2**
-└── Next: Line 5
-
-[Step 30]
-├── Line: `if (arr[j] > arr[j + 1])`
-├── Evaluation: `arr[2]` (5) > `arr[3]` (4) $\rightarrow$ **TRUE**
-└── Next: Line 6
-
-[Step 31-33]
-├── Operation: Swap (5, 4)
-├── After State:
-│   ├── temp = 5
-│   └── Current Array: **[3, 2, 4, 5, 7]**
-└── Next: Line 4
-
-#### INNER LOOP — Termination
-
-[Step 34]
-├── Line: `for (...; j++)`
-├── Evaluation: `j` becomes 3. Check `3 < 3` $\rightarrow$ **FALSE**
-└── Next: Line 3
+Result after Pass 2: `[3, 2, 4, 5, 7]`
 
 ---
 
-### OUTER LOOP — Pass 3 (i = 2)
-Target: Bubble 3rd largest element to `arr[2]`.
-Current Array: `[3, 2, 4, 5, 7]`
+## Pass 3 — `i = 2`
 
-[Step 35]
-├── Line: `for (...; i++)`
-├── Evaluation: `i` becomes 2. Check `2 < 4` $\rightarrow$ **TRUE**
-├── After State: `i` = **2**
-└── Next: Line 4
+Initial Array: `[3, 2, 4, 5, 7]`
 
-#### INNER LOOP — Iteration 1 (j = 0)
+| State / Step        | j = 0     | j = 1     |
+| ------------------- | --------- | --------- |
+| **Array before**    | 3,2,4,5,7 | 2,3,4,5,7 |
+| `i`                 | 2         | 2         |
+| `j`                 | 0         | 1         |
+| `arr[j]`            | 3         | 3         |
+| `arr[j+1]`          | 2         | 4         |
+| `arr[j] > arr[j+1]` | TRUE      | FALSE     |
+| Swap performed      | Yes       | No        |
+| **Array after**     | 2,3,4,5,7 | 2,3,4,5,7 |
 
-[Step 36]
-├── Line: `for (int j = 0; j < n - i - 1; j++)`
-├── Evaluation: `j` init to 0. Check `0 < (5 - 2 - 1)` $\rightarrow$ `0 < 2` $\rightarrow$ **TRUE**
-├── After State: `j` = **0**
-└── Next: Line 5
-
-[Step 37]
-├── Line: `if (arr[j] > arr[j + 1])`
-├── Evaluation: `arr[0]` (3) > `arr[1]` (2) $\rightarrow$ **TRUE**
-└── Next: Line 6
-
-[Step 38-40]
-├── Operation: Swap (3, 2)
-├── After State:
-│   ├── temp = 3
-│   └── Current Array: **[2, 3, 4, 5, 7]**
-└── Next: Line 4
-
-#### INNER LOOP — Iteration 2 (j = 1)
-
-[Step 41]
-├── Line: `for (...; j++)`
-├── Evaluation: `j` becomes 1. Check `1 < 2` $\rightarrow$ **TRUE**
-├── After State: `j` = **1**
-└── Next: Line 5
-
-[Step 42]
-├── Line: `if (arr[j] > arr[j + 1])`
-├── Evaluation: `arr[1]` (3) > `arr[2]` (4) $\rightarrow$ **FALSE**
-└── Next: Line 4
-
-#### INNER LOOP — Termination
-
-[Step 43]
-├── Line: `for (...; j++)`
-├── Evaluation: `j` becomes 2. Check `2 < 2` $\rightarrow$ **FALSE**
-└── Next: Line 3
+Result after Pass 3: `[2, 3, 4, 5, 7]`
 
 ---
 
-### OUTER LOOP — Pass 4 (i = 3)
-Target: Bubble 4th largest element to `arr[1]`.
-Current Array: `[2, 3, 4, 5, 7]`
+## Pass 4 — `i = 3`
 
-[Step 44]
-├── Line: `for (...; i++)`
-├── Evaluation: `i` becomes 3. Check `3 < 4` $\rightarrow$ **TRUE**
-├── After State: `i` = **3**
-└── Next: Line 4
+Initial Array: `[2, 3, 4, 5, 7]`
 
-#### INNER LOOP — Iteration 1 (j = 0)
+| State / Step        | j = 0     |
+| ------------------- | --------- |
+| **Array before**    | 2,3,4,5,7 |
+| `i`                 | 3         |
+| `j`                 | 0         |
+| `arr[j]`            | 2         |
+| `arr[j+1]`          | 3         |
+| `arr[j] > arr[j+1]` | FALSE     |
+| Swap performed      | No        |
+| **Array after**     | 2,3,4,5,7 |
 
-[Step 45]
-├── Line: `for (int j = 0; j < n - i - 1; j++)`
-├── Evaluation: `j` init to 0. Check `0 < (5 - 3 - 1)` $\rightarrow$ `0 < 1` $\rightarrow$ **TRUE**
-├── After State: `j` = **0**
-└── Next: Line 5
-
-[Step 46]
-├── Line: `if (arr[j] > arr[j + 1])`
-├── Evaluation: `arr[0]` (2) > `arr[1]` (3) $\rightarrow$ **FALSE**
-└── Next: Line 4
-
-#### INNER LOOP — Termination
-
-[Step 47]
-├── Line: `for (...; j++)`
-├── Evaluation: `j` becomes 1. Check `1 < 1` $\rightarrow$ **FALSE**
-└── Next: Line 3
+Result after Pass 4: `[2, 3, 4, 5, 7]`
 
 ---
 
-### OUTER LOOP — Termination
+## Final Sorted Array
 
-[Step 48]
-├── Line: `for (...; i++)`
-├── Evaluation: `i` becomes 4. Check `4 < 4` $\rightarrow$ **FALSE**
-└── Next: End of Function
-
-[Step 49]
-├── Operation: Return
-└── Final State: Function exits.
+`[2, 3, 4, 5, 7]`
 
 ---
 
