@@ -1,16 +1,16 @@
 # Binary Search
 
-Imagine searching for a name in a **dictionary**.
-You never start from page one.
+Imagine a **dictionary**.
+You never start reading from page 1 to find a word.
 
 Instead:
 
-* You open the book in the **middle**.
-* Decide whether the word is on the **left half** or **right half**.
-* Throw away the other half completely.
-* Repeat the process on the remaining half.
+* You open the **middle**.
+* Decide whether the word lies **left** or **right**.
+* Throw away half the pages.
+* Repeat.
 
-That’s **Binary Search** — repeatedly halving the search space.
+Binary Search works exactly like this — **divide, decide, discard**.
 
 ---
 
@@ -39,64 +39,104 @@ int binarySearch(vector<int>& arr, int target) {
 
 **Input Status:**
 
-* **Source:** C++ iterative `binarySearch`
-* **Precondition:** Array **must be sorted**
-* **Test Case:** `arr = [2, 3, 4, 5, 7]`, `target = 4`
+* **Source:** C++ `binarySearch` using `std::vector`
+* **Array:** `[2, 4, 5, 7, 8, 9, 10, 13, 15]`
+* **Target:** `7`
 
 ---
 
 ## PHASE 0 — SANITY & SEMANTICS CHECK
 
-| Category         | Assessment                            |
-| :--------------- | :------------------------------------ |
-| **Language**     | C++ (STL vector)                      |
-| **Correctness**  | Valid iterative Binary Search         |
-| **Mutability**   | Read-only access (array not modified) |
-| **Memory**       | $O(1)$ extra space                    |
-| **Precondition** | Array must be sorted                  |
-| **Determinism**  | Deterministic                         |
+| Category         | Assessment                         |
+| :--------------- | :--------------------------------- |
+| **Language**     | C++ (STL vector)                   |
+| **Precondition** | Array must be **sorted**           |
+| **Correctness**  | Standard iterative Binary Search   |
+| **Mutability**   | Read-only access (no modification) |
+| **Memory**       | $O(1)$ auxiliary space             |
+| **Determinism**  | Deterministic                      |
 
 ---
 
-# Binary Search — Step-by-Step Execution Table
+# Binary Search — Iteration-wise Trace
 
 ---
 
 ## Iteration 1
 
-Initial State:
+| Variable   | Value             |
+| ---------- | ----------------- |
+| `low`      | 0                 |
+| `high`     | 8                 |
+| `mid`      | `0 + (8-0)/2 = 4` |
+| `arr[mid]` | 8                 |
 
-* `low = 0`
-* `high = 4`
+Comparison:
 
-| Variable   | Value               |
-| ---------- | ------------------- |
-| mid        | `0 + (4 - 0)/2 = 2` |
-| arr[mid]   | 4                   |
-| Comparison | `4 == 4`            |
+* `8 > 7` → discard **right half**
 
-Target found.
+Update:
 
----
-
-## Result
-
-Index returned: **2**
+* `high = mid - 1 = 3`
 
 ---
 
-## Alternate Dry Run — Target Not Present
+## Iteration 2
 
-**Target:** `6`
+| Variable   | Value             |
+| ---------- | ----------------- |
+| `low`      | 0                 |
+| `high`     | 3                 |
+| `mid`      | `0 + (3-0)/2 = 1` |
+| `arr[mid]` | 4                 |
 
-| Iteration | low | high | mid | arr[mid] | Action       |
-| --------- | --- | ---- | --- | -------- | ------------ |
-| 1         | 0   | 4    | 2   | 4        | Search right |
-| 2         | 3   | 4    | 3   | 5        | Search right |
-| 3         | 4   | 4    | 4   | 7        | Search left  |
-| End       | 4   | 3    | —   | —        | Stop         |
+Comparison:
 
-Return value: **-1**
+* `4 < 7` → discard **left half**
+
+Update:
+
+* `low = mid + 1 = 2`
+
+---
+
+## Iteration 3
+
+| Variable   | Value             |
+| ---------- | ----------------- |
+| `low`      | 2                 |
+| `high`     | 3                 |
+| `mid`      | `2 + (3-2)/2 = 2` |
+| `arr[mid]` | 5                 |
+
+Comparison:
+
+* `5 < 7` → discard **left half**
+
+Update:
+
+* `low = mid + 1 = 3`
+
+---
+
+## Iteration 4
+
+| Variable   | Value             |
+| ---------- | ----------------- |
+| `low`      | 3                 |
+| `high`     | 3                 |
+| `mid`      | `3 + (3-3)/2 = 3` |
+| `arr[mid]` | 7                 |
+
+Comparison:
+
+* `7 == target` → **FOUND**
+
+---
+
+## Search Terminated
+
+Target found at index **3**.
 
 ---
 
@@ -104,33 +144,35 @@ Return value: **-1**
 
 ### 1. Final Output
 
-* If target exists → index returned
-* If not → `-1`
+```text
+Index = 3
+```
 
 ### 2. Operation Counters
 
-| Metric          | Count                  | Details                    |
-| :-------------- | :--------------------- | :------------------------- |
-| **Iterations**  | ≤ `log2(n)`            | Halving each step          |
-| **Comparisons** | ≤ `log2(n)`            | Equality + direction check |
-| **Assignments** | Constant per iteration | low, high, mid             |
+| Metric             | Count | Details           |
+| :----------------- | :---- | :---------------- |
+| **Iterations**     | 4     | Loop executions   |
+| **Comparisons**    | 4     | One per iteration |
+| **Array Accesses** | 4     | `arr[mid]`        |
 
 ### 3. Observed Complexity
 
-* **Best Case:** $O(1)$ — Found at mid
-* **Average Case:** $O(log n)$
-* **Worst Case:** $O(log n)$
-* **Space:** $O(1)$
+* **Time:** $O(\log_2 n)$
+* **Space:** $O(1)$ — Iterative
 
 ---
 
 ### Key Insight
 
-Binary Search trades **ordering cost upfront** for **extremely fast lookup**.
+Binary Search is powerful because:
 
-If searching happens often:
+* Each step removes **half** the problem
+* Performance scales logarithmically
 
-* Sort once
-* Search many times
+But it is **fragile**:
 
-That’s why it’s foundational in systems, databases, and low-level libraries.
+* One unsorted element breaks correctness
+* Off-by-one errors break implementations
+
+Mastery comes from tracing `low`, `mid`, and `high` with discipline.
