@@ -1,8 +1,12 @@
-# Search Insert Position — Detailed Trace (dryrun.md)
+# Search Insert Position 
+
+---
 
 This document performs a **complete, line-by-line execution trace** of the **Binary Search (Insert Position)** algorithm. The goal is to determine the index at which a target value should be inserted in a sorted array to maintain order.
 
 ---
+
+## Link :- [LeetCode](https://leetcode.com/problems/search-insert-position/description/)
 
 ## PROBLEM STATEMENT
 
